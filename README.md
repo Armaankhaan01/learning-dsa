@@ -33,7 +33,7 @@ _🧠 Formatting, structure, and Markdown layout styled with help from **ChatGPT
 
 ---
 
-## 📍 1. What is Time Complexity?
+## 📍 1.1 What is Time Complexity?
 
 **Time Complexity** measures how the *execution time* of an algorithm grows with the size of the input `n`.
 
@@ -80,7 +80,7 @@ def all_pairs(arr):
 
 ---
 
-## 🧾 2. Visualizing Time Complexities
+## 🧾 1.2 Visualizing Time Complexities
 
 | Type         | Big O        | Shape on Graph             | Example                     |
 | ------------ | ------------ | -------------------------- | --------------------------- |
@@ -95,7 +95,7 @@ def all_pairs(arr):
 
 ---
 
-## 🧩 3. Understanding Big O
+## 🧩 1.3 Understanding Big O
 
 **Big O Notation** describes the *upper bound* — the *worst-case* growth rate of an algorithm.
 
@@ -116,7 +116,7 @@ and it’s **not** `O(n)` because no straight line can bound a parabola from abo
 
 ---
 
-## 🧮 4. Simplifying Big O Expressions
+## 🧮 1.4 Simplifying Big O Expressions
 
 We drop:
 
@@ -139,7 +139,7 @@ Why?
 
 ---
 
-## 💾 5. Space Complexity
+## 💾 1.5 Space Complexity
 
 **Space Complexity** measures how much *extra memory* your algorithm needs.
 
@@ -173,7 +173,7 @@ def square_in_place(arr):
 
 ---
 
-## ⚡ 6. Constant Time Operations (`O(1)`)
+## ⚡ 1.6 Constant Time Operations (`O(1)`)
 
 Operations that take the same amount of time **no matter the input size**.
 
@@ -200,7 +200,7 @@ a[0], a[1], a[2]  # still O(1)
 
 ---
 
-## 📉 7. Typical Growth Rates (From Best to Worst)
+## 📉 1.7 Typical Growth Rates (From Best to Worst)
 
 | Complexity   | Name         | Common Example          |
 | ------------ | ------------ | ----------------------- |
@@ -215,7 +215,7 @@ a[0], a[1], a[2]  # still O(1)
 
 ---
 
-## ⚙️ 8. Big O Laws (Quick Rules)
+## ⚙️ 1.8 Big O Laws (Quick Rules)
 
 1. **Drop constants:**
    `O(2n)` → `O(n)`
@@ -246,7 +246,7 @@ a[0], a[1], a[2]  # still O(1)
 
 ---
 
-## 🧱 9. Quick Summary of Examples
+## 🧱 1.9 Quick Summary of Examples
 
 | Operation            | Time Complexity | Space Complexity |
 | -------------------- | --------------- | ---------------- |
@@ -260,7 +260,7 @@ a[0], a[1], a[2]  # still O(1)
 
 ---
 
-## 🧠 10. Final Takeaways
+## 🧠 1.10 Final Takeaways
 
 * **Time Complexity** → how long your code runs
 * **Space Complexity** → how much memory it uses
@@ -273,4 +273,174 @@ a[0], a[1], a[2]  # still O(1)
   * O(n) → Good
   * Avoid O(n²)+ unless absolutely necessary
 
+# 🧩 2. Static Arrays, Dynamic Arrays, and Strings
+
+> 🧠 **Learning Source:**  
+> - 🎥 [YouTube Lecture – Arrays & Strings (by AlgoMap)](https://youtu.be/TQMvBTKn2p0?si=-0-7E9Yvnp-Hf8tl)
+
 ---
+
+## 📍 2.1 Static Arrays
+
+### 🔹 Definition
+
+A **static array** is a **contiguous block of memory with a fixed size**.  
+Once created, its size **cannot be changed**.  
+Each element is accessed using an **index** from `0` to `length - 1`.
+
+---
+
+### 🧩 Example
+
+```text
+Array a = [1, 2, 3, 4, 5]
+Indices = 0  1  2  3  4
+Length = 5
+````
+
+---
+
+### ⚙️ 2.1.1 Common Operations & Time Complexity
+
+| Operation         | Description                         | Time Complexity |
+| ----------------- | ----------------------------------- | --------------- |
+| Access `a[i]`     | Directly read an element at index i | **O(1)**        |
+| Update `a[i] = x` | Modify value at index i             | **O(1)**        |
+| Search `x in a`   | Scan through all elements           | **O(n)**        |
+| Insert            | Shift elements to make room         | **O(n)**        |
+| Delete            | Shift elements to fill gap          | **O(n)**        |
+
+---
+
+### 🧠 2.1.2 Key Notes
+
+* Static arrays are **mutable** (values can change) but **fixed in size**.
+* Memory is **contiguous**, enabling **constant-time access**.
+* Useful when you know the data size in advance.
+
+---
+
+## ⚙️ 2.2 Dynamic Arrays
+
+### 🔹 Definition
+
+A **dynamic array** can **grow or shrink** in size.
+It’s built using a static array underneath — when full, it **creates a new larger array** and **copies elements over**.
+
+---
+
+### 🧩 Example (Python)
+
+```python
+a = [1, 2, 3]
+a.append(4)   # O(1) average (amortized)
+a.insert(1, 5)  # O(n)
+a.pop()  # O(1)
+```
+
+---
+
+### 🧮 2.2.1 How Dynamic Arrays Grow
+
+* When full, a **new array with double capacity** is created.
+* All elements are **copied** to the new array.
+* This resizing is costly, but happens **rarely**.
+
+---
+
+### ⚙️ 2.2.2 Operation Complexity
+
+| Operation            | Description                 | Time Complexity                                 |
+| -------------------- | --------------------------- | ----------------------------------------------- |
+| Access `a[i]`        | Direct lookup               | **O(1)**                                        |
+| Update `a[i] = x`    | Modify element              | **O(1)**                                        |
+| Append `a.append(x)` | Add at end                  | **O(1)** (amortized) / **O(n)** (during resize) |
+| Pop                  | Remove last element         | **O(1)**                                        |
+| Insert (not end)     | Shift elements              | **O(n)**                                        |
+| Delete (not end)     | Shift elements              | **O(n)**                                        |
+| Search `x in a`      | Scan for element            | **O(n)**                                        |
+| Length `len(a)`      | Return stored size property | **O(1)**                                        |
+
+---
+
+### 🔹 2.2.3 Amortized Complexity
+
+Even though resizing is `O(n)`, it happens infrequently.
+So the **average cost per append** = **O(1)** (called **amortized O(1)**).
+
+---
+
+## 💬 2.3 Strings
+
+### 🔹 Definition
+
+A **string** is essentially an **array of characters**.
+In Python, strings are **immutable**, meaning you **cannot change** them once created.
+
+---
+
+### 🧩 Example
+
+```python
+s = "abc"
+```
+
+* Stored as contiguous characters in memory.
+* Any change (like concatenation) creates a **new string**.
+
+---
+
+### ⚙️ 2.3.1 Common Operations & Complexity
+
+| Operation             | Description                        | Time Complexity        |
+| --------------------- | ---------------------------------- | ---------------------- |
+| Access `s[i]`         | Get character at index i           | **O(1)**               |
+| Concatenate `s + "x"` | Create new string (copy all chars) | **O(n)**               |
+| Check `'a' in s`      | Search for character               | **O(n)**               |
+| Insert/Delete         | Not possible directly              | **O(n)** (via copying) |
+| Length `len(s)`       | Get pre-stored length              | **O(1)**               |
+
+---
+
+### 🧩 Example (Python)
+
+```python
+s = "hello"
+b = s + "z"   # O(n), creates 'helloz'
+'e' in s      # O(n), search
+len(s)        # O(1)
+```
+
+---
+
+## 🧾 2.4 Summary Chart
+
+| Data Structure           | Operation                | Avg Time | Notes             |
+| ------------------------ | ------------------------ | -------- | ----------------- |
+| **Static Array**         | Access / Modify          | O(1)     | Fixed size        |
+|                          | Insert / Delete          | O(n)     | Requires shifting |
+| **Dynamic Array (List)** | Append (end)             | O(1)*    | Amortized         |
+|                          | Insert / Delete (middle) | O(n)     | Shifting required |
+|                          | Access / Modify          | O(1)     | Direct index      |
+|                          | Search                   | O(n)     | Sequential scan   |
+| **String (Immutable)**   | Access                   | O(1)     | Immutable         |
+|                          | Append / Modify          | O(n)     | New copy created  |
+|                          | Search `'x' in s`        | O(n)     | Sequential scan   |
+
+---
+
+## 💡 2.5 Key Takeaways
+
+* **Static Arrays:** Fixed size, fast access, efficient memory layout.
+* **Dynamic Arrays:** Flexible size with **amortized O(1)** appends.
+* **Strings (in Python):** Immutable — any modification creates a new copy.
+* `len()` for both arrays and strings is **O(1)** since size is stored internally.
+* Dynamic arrays grow by **doubling capacity** when full.
+
+---
+
+📚 **Next Topic → 3. Linked Lists** (coming up next in the DSA roadmap)
+
+---
+
+
